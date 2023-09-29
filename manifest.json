@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Outkept helper tools",
+    "version": "1.0",
+    "description": "Adds some 'missing' features",
+    "permissions": ["activeTab"],
+    "icons": {
+      "16": "assets/logo-white.svg",
+      "48": "assets/logo-white.svg",
+      "128": "assets/logo-white.svg"
+    },
+    "content_scripts": [
+      {
+        "run_at": "document_idle",
+        "matches": ["https://platform.outkept.com/bounties"],
+        "js": ["content.js"]
+      }
+    ]
+  }

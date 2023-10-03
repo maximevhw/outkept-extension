@@ -1,6 +1,5 @@
 sleep(1000).then(() => { 
     const table = document.querySelector("table.p-datatable-table");
-
     const bountiecells = table.querySelectorAll("tbody tr td:nth-child(4) div");
 
     let bounties = [];
@@ -22,8 +21,6 @@ sleep(1000).then(() => {
                         <td role="cell" style="width: 20rem;">Total: €&nbsp;${total}</td>
                         <td role="cell" style="width: 20rem;"></td>
                     </tr>`
-    //document.querySelector("table.p-datatable-table");
-    //table.querySelector("tbody").insertAdjacentElement("beforeend", totalRow);
 
     document.querySelector("table.p-datatable-table tbody").insertAdjacentHTML("beforeend", totalRow);
     
@@ -33,28 +30,28 @@ sleep(1000).then(() => {
 
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 
-  function parsePrices(pricesArray) {
-    const parsedPrices = [];
+function parsePrices(pricesArray) {
+  const parsedPrices = [];
     
-    pricesArray.forEach(priceString => {
-      // Remove euro sign and whitespace, and parse to a double
-      const cleanedPrice = parseFloat(priceString.replace(/€\s+/g, '').replace(',', '.'));
+  pricesArray.forEach(priceString => {
+    const cleanedPrice = parseFloat(priceString.replace(/€\s+/g, '').replace(',', '.'));
   
-      // Check if the parsing was successful (not NaN)
-      if (!isNaN(cleanedPrice)) {
+    if (!isNaN(cleanedPrice)) {
         parsedPrices.push(cleanedPrice);
-      }
-    });
+    } else {
+      console.error("a price wasnt parced properly");
+    }
+  });
   
-    return parsedPrices;
-  }
+  return parsedPrices;
+}
 
 
-  function sumArray(arr) {
-    return arr.reduce((total, currentValue) => total + currentValue, 0);
-  }
+function sumArray(arr) {
+  return arr.reduce((total, currentValue) => total + currentValue, 0);
+}
   

@@ -11,8 +11,8 @@
     },
     "content_scripts": [
       {
-        "run_at": "document_idle",
-        "matches": ["https://platform.outkept.com/bounties"],
+        "run_at": "document_end",
+        "matches": ["https://platform.outkept.com/*"],
         "js": ["content.js"]
       }
     ]

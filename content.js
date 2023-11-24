@@ -1,4 +1,26 @@
-sleep(1000).then(() => { 
+const body = document.querySelector('body');
+const observerConfig = {
+    childList: true, // Watch for changes in the child elements of the target
+    subtree: true, // Watch for changes in the entire subtree, not just the direct children
+};
+
+const callback = (mutationList, observer) => {
+    const h1Element = body.querySelector('h1');
+    const table = body.querySelector('table');
+    if (h1Element && h1Element.innerText === "Claim your bounties" && table) {
+        const rows = table.rows;
+        if (rows[1].className !== "p-datatable-emptymessage") {
+            console.log("bountie page reached");
+            addPriceField();
+            observer.disconnect();
+        }
+    }
+};
+
+const observer = new MutationObserver(callback);
+observer.observe(body, observerConfig);
+
+function addPriceField() {
     const table = document.querySelector("table.p-datatable-table");
     const bountiecells = table.querySelectorAll("tbody tr td:nth-child(4) div");
 
@@ -24,15 +46,11 @@ sleep(1000).then(() => {
 
     document.querySelector("table.p-datatable-table tbody").insertAdjacentHTML("beforeend", totalRow);
     
-});
-
-
-
+}
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 
 function parsePrices(pricesArray) {
   const parsedPrices = [];
@@ -49,7 +67,6 @@ function parsePrices(pricesArray) {
   
   return parsedPrices;
 }
-
 
 function sumArray(arr) {
   return arr.reduce((total, currentValue) => total + currentValue, 0);
